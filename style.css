@@ -1,121 +1,131 @@
-/* Cool infinite background scrolling animation.
- * Twitter: @kootoopas
- */
-/* Exo thin font from Google. */
-@import url(https://fonts.googleapis.com/css?family=Exo:100);
-/* Background data (Original source: https://subtlepatterns.com/grid-me/) */
-/* Animations */
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css?family=Exo:100');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600');
+
+/* Animations for background scrolling */
 @-webkit-keyframes bg-scrolling-reverse {
-  100% {
-    background-position: 50px 50px;
-  }
+  100% { background-position: 50px 50px; }
 }
 @-moz-keyframes bg-scrolling-reverse {
-  100% {
-    background-position: 50px 50px;
-  }
+  100% { background-position: 50px 50px; }
 }
 @-o-keyframes bg-scrolling-reverse {
-  100% {
-    background-position: 50px 50px;
-  }
+  100% { background-position: 50px 50px; }
 }
 @keyframes bg-scrolling-reverse {
-  100% {
-    background-position: 50px 50px;
-  }
+  100% { background-position: 50px 50px; }
 }
 @-webkit-keyframes bg-scrolling {
-  0% {
-    background-position: 50px 50px;
-  }
+  0% { background-position: 50px 50px; }
 }
 @-moz-keyframes bg-scrolling {
-  0% {
-    background-position: 50px 50px;
-  }
+  0% { background-position: 50px 50px; }
 }
 @-o-keyframes bg-scrolling {
-  0% {
-    background-position: 50px 50px;
-  }
+  0% { background-position: 50px 50px; }
 }
 @keyframes bg-scrolling {
-  0% {
-    background-position: 50px 50px;
-  }
+  0% { background-position: 50px 50px; }
 }
+
 /* Main styles */
 body {
   margin-top: 13.5rem;
   color: #999;
-  font: 400 16px/1.5 exo, ubuntu, "segoe ui", helvetica, arial, sans-serif;
+  font: 400 0.8rem/1.5 exo, ubuntu, 'segoe ui', helvetica, arial, sans-serif;
   text-align: center;
-  /* img size is 50x50 */
+  /* Background image (50x50px grid) */
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC") repeat 0 0;
   -webkit-animation: bg-scrolling-reverse 0.92s infinite;
-  /* Safari 4+ */
   -moz-animation: bg-scrolling-reverse 0.92s infinite;
-  /* Fx 5+ */
   -o-animation: bg-scrolling-reverse 0.92s infinite;
-  /* Opera 12+ */
   animation: bg-scrolling-reverse 0.92s infinite;
-  /* IE 10+ */
   -webkit-animation-timing-function: linear;
   -moz-animation-timing-function: linear;
   -o-animation-timing-function: linear;
   animation-timing-function: linear;
 }
+
 body::before {
   content: "";
-  font-size: 8rem;
-  font-weight: 100;
+  font-size: clamp(3rem, 8vw, 4rem); /* Smaller responsive font size */
+  font-weight: bold;
   font-style: normal;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600');
-
- a {
-  padding: .5em .8em;
+/* Anchor tag styling */
+a {
+  padding: 0.3em 0.6em; /* Reduced padding for less bulk */
   color: rgba(0, 0, 0, 0.5);
   position: relative;
   text-decoration: none;
-  font-size: 30px;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem); /* Smaller font size */
+  display: inline-block;
 }
 
- a::before, a::after {
+a::before,
+a::after {
   content: '';
-  height: 14px;
-  width: 14px;
+  height: 8px; /* Smaller pseudo-elements */
+  width: 8px;
   position: absolute;
-  transition: all .35s ease;
+  transition: all 0.35s ease;
   opacity: 0;
 }
 
 a::before {
-  content: '';
   right: 0;
   top: 0;
-  border-top: 3px solid #000000;
-  border-right: 3px solid #353535;
+  border-top: 1.5px solid #000000; /* Thinner borders */
+  border-right: 1.5px solid #353535;
   transform: translate(-100%, 50%);
 }
 
-a:after {
-  content: '';
+a::after {
   left: 0;
   bottom: 0;
-  border-bottom: 3px solid #000000;
-  border-left: 3px solid #353535;
-  transform: translate(100%, -50%)
+  border-bottom: 1.5px solid #000000;
+  border-left: 1.5px solid #353535;
+  transform: translate(100%, -50%);
 }
 
-a:hover:before,
-a:hover:after{
-  transform: translate(0,0);
+a:hover::before,
+a:hover::after {
+  transform: translate(0, 0);
   opacity: 1;
 }
 
 a:hover {
   color: #000000;
+}
+
+/* Media query for mobile devices (screens < 600px) */
+@media (max-width: 600px) {
+  body {
+    font-size: 0.7rem; /* Smaller base font for mobile */
+  }
+
+  a {
+    padding: 0.2em 0.5em; /* Tighter padding for mobile */
+    font-size: clamp(0.8rem, 3vw, 1rem); /* Even smaller for mobile */
+  }
+
+  a::before,
+  a::after {
+    height: 6px; /* Smaller pseudo-elements for mobile */
+    width: 6px;
+    border-width: 1px; /* Thinner borders */
+  }
+}
+
+/* Media query for laptops/desktops (screens > 600px) */
+@media (min-width: 601px) {
+  body {
+    font-size: 0.9rem; /* Slightly larger but still compact */
+  }
+
+  a {
+    padding: 0.3em 0.6em;
+    font-size: clamp(1rem, 2vw, 1.2rem); /* Compact for desktops */
+  }
 }
